@@ -1,4 +1,5 @@
 import React, {useState, useContext, createContext, useEffect} from "react";
+import jwt_decode from "jwt-decode";
 import axios from "axios";
 
 export default function Login(props) {
@@ -21,7 +22,10 @@ export default function Login(props) {
         )
 
         localStorage.setItem('token', response.data.token);
-        localStorage.getItem('token');
+        
+        var decoded = jwt_decode(response.data.token);
+
+        console.log(decoded);
 
         } catch (error) {
         console.error(error);
