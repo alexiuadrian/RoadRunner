@@ -1,14 +1,11 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, createContext, useEffect} from "react";
 import axios from "axios";
-import { UserContext } from "../UserContext";
 
 export default function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const {user, setUser} = useContext(UserContext);
 
     async function sendLogin(event) {
-        //no html mumbo jumbo
         event.preventDefault();
 
         var response = null;
@@ -21,23 +18,16 @@ export default function Login(props) {
                 "username": username,
                 "password": password
             }
-        );
+        )
 
-        var token = await response.data.token;
-
-        console.log(token);
-
-        console.log("request sent", response);
+        localStorage.setItem('token', response.data.token);
+        localStorage.getItem('token');
 
         } catch (error) {
         console.error(error);
         }
 
-        setUser(response.data.token);
-        console.log(user);
-
       }
-
 
     return (
         <div>
