@@ -9,19 +9,24 @@ import AllRuns from './components/AllRuns';
 import AddRun from './components/AddRun';
 import Run from './components/Run';
 import NotFound from './components/NotFound';
-
+import RequireAuth from './components/RequireAuth';
+import RequireNotAuth from './components/RequireNotAuth';
 
 function App() {
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<AllRuns/>}/>
-        <Route path="login" element={<Login/>}/>
-        <Route path="register" element={<Register/>}/>
+        {/* Routes for unauthenticated users */}
+        <Route path="login" element={<RequireNotAuth><Login/></RequireNotAuth>}/>
+        <Route path="register" element={<RequireNotAuth><Register/></RequireNotAuth>}/>
+
+
+        {/* Routes for authenticated users */}
+        <Route path="/" element={<RequireAuth><AllRuns/></RequireAuth>}/>
+        <Route path="add" element={<RequireAuth><AddRun/></RequireAuth>}/>
+
         <Route path="404" element={<NotFound/>}/>
-        <Route path="run/:runId" element={<Run/>}/>
-        <Route path="add" element={<AddRun/>}/>
       </Routes>
     </Router>
   );

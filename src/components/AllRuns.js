@@ -1,8 +1,10 @@
 import React, {useContext, useState, useEffect} from "react";
 import axios from "axios";
+import Run from './Run';
+import Navbar from './Navbar'
 
 export default function AllRuns(props) {
-    const [items, setItems] = useState(null);
+    const [runs, setRuns] = useState(null);
 
     useEffect(() => {
         const config = {
@@ -17,7 +19,7 @@ export default function AllRuns(props) {
         })
         .then((res) => {
             console.log(res.data);
-            setItems(res.data);
+            setRuns(res.data);
         })
         .catch((err) => {
             console.log(err);
@@ -27,8 +29,12 @@ export default function AllRuns(props) {
 
     return (
         <div>
+            <Navbar/>
             <h1>My runs</h1>
-            <h2>{localStorage.getItem('token')}</h2>
+            {runs &&
+              runs.map((run, index) => (
+                <Run class='mt-1' data={run}/>
+              ))}
         </div>
     );
 }

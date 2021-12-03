@@ -1,16 +1,32 @@
 import React from "react";
 
 export default function Run(props) {
+    function formatTime() {
+        const hoursAndMinutes = props.data.time.split(" ");
+
+        if (hoursAndMinutes[0] == 0) {
+            return (hoursAndMinutes[1] + ' minutes');
+        }
+        else if (hoursAndMinutes[0] == 1) {
+            return (hoursAndMinutes[0] + ' hour and ' + hoursAndMinutes[1] + ' minutes');
+        }
+        else {
+            return (hoursAndMinutes[0] + ' hours and ' + hoursAndMinutes[1] + ' minutes');
+        }
+    }
+    
     return (
         <div>
-            <h1>Run</h1>
             <div class="card shadow-lg">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <h5 class="card-title">
+                        You ran 
+                        {' ' + props.data.distance + ' km '}
+                        in  
+                        {' ' + formatTime()}
+                     </h5>
                     <p class="card-text">
-                    Some quick example text to build on the card title and make up the bulk of the
-                    card's content.
+                    Congratulations! You had an average speed of {props.data.average_speed.toFixed(2)} km/h.
                     </p>
                 </div>
             </div>

@@ -41,3 +41,25 @@ body {
   margin: 5% 35%;
   background-color: #68B2A0;
 }
+
+@media only screen and (max-width: 600px) {
+  body {
+    margin: 5% 15%;
+    background-color: #68B2A0;
+  }
+
+  .runButton {
+    width: 35px;
+    height: 35px;
+  }
+
+  .plusButton {
+    width: 35px;
+    height: 35px;
+  }
+
+  .signoutButton {
+    width: 35px;
+    height: 35px;
+  }
+}

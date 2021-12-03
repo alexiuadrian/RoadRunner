@@ -1,10 +1,14 @@
 import React, {useState, useContext, createContext, useEffect} from "react";
+import { useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import NavbarLogin from "./NavbarLogin";
 
 export default function Login(props) {
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     async function sendLogin(event) {
         event.preventDefault();
@@ -22,10 +26,7 @@ export default function Login(props) {
         )
 
         localStorage.setItem('token', response.data.token);
-        
-        var decoded = jwt_decode(response.data.token);
-
-        console.log(decoded);
+        navigate('/');
 
         } catch (error) {
         console.error(error);
@@ -33,8 +34,11 @@ export default function Login(props) {
 
       }
 
+     
+
     return (
         <div>
+            <NavbarLogin />
             <form onSubmit={ (event) => {
                 sendLogin(event);
             } }>

@@ -1,6 +1,7 @@
 import React, {useState, useContext, createContext, useEffect} from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import Navbar from "./Navbar";
 
 export default function AddRun(props) {
     const [date, setDate] = useState('');
@@ -39,6 +40,7 @@ export default function AddRun(props) {
 
     return (
         <div>
+            <Navbar/>
             <form onSubmit={ (event) => {
                 sendLogin(event);
             } }>
