@@ -40,7 +40,7 @@ export default function AllRuns(props) {
             console.log(err);
         });
     }
- 
+
     return (
         <div>
             <Navbar/>
@@ -48,7 +48,7 @@ export default function AllRuns(props) {
             {runs &&
               runs.map((run, index) => (
                 <div class='mt-3'>
-                    <Run data={run}/>
+                    <Run id="edit" data={run}/>
                 </div>
               ))}
         </div>

@@ -16,7 +16,6 @@ export default function Login(props) {
         var response = null;
 
         try {
-        console.log(username, password);
         response = await axios.post(
             "http://localhost:3000/login",
             {

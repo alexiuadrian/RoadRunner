@@ -14,6 +14,10 @@ export default function AddRun(props) {
     const [minutes, setMinutes] = useState('');
     const [userId, setUserId] = useState(jwt_decode(localStorage.getItem('token')).user_id);
 
+    function refreshPage() {
+        window.location.reload(false);
+    }
+
     async function addRun(event) {
         event.preventDefault();
 
@@ -38,6 +42,8 @@ export default function AddRun(props) {
             }
 
         console.log(response.data);
+
+        refreshPage();
       }
 
     return (

@@ -1,11 +1,10 @@
 import React, {useState, useContext, createContext, useEffect} from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import Navbar from "./Navbar";
-import SecondNavbar from "./SecondNavbar";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import "../App.css";
 
 export default function Edit(props) {
     const [date, setDate] = useState(new Date());
@@ -14,7 +13,7 @@ export default function Edit(props) {
     const [minutes, setMinutes] = useState('');
     const [userId, setUserId] = useState(jwt_decode(localStorage.getItem('token')).user_id);
 
-    async function addRun(event) {
+    async function editRun(event) {
         event.preventDefault();
 
         var response = null;
@@ -49,9 +48,10 @@ export default function Edit(props) {
       }
 
     return (
-        <div>
+        <div id="edit">
+
             <form onSubmit={ (event) => {
-                addRun(event);
+                editRun(event);
             } }>
                 
                 <div class="mb-3">
@@ -78,7 +78,7 @@ export default function Edit(props) {
 
                 </div>
 
-                <button type="submit" onClick={addRun} class="btn btn-primary mt-4">Submit</button>
+                <button type="submit" class="btn btn-primary mt-4">Submit</button>
             </form>
         </div>
     );

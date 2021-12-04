@@ -1,9 +1,16 @@
 import React, {useContext, useState, useEffect} from "react";
+import { unmountComponentAtNode, render } from "react-dom";
 import { useNavigate } from 'react-router-dom';
 import Edit from "./Edit";
 import axios from "axios";
 import trash from "../assets/trash.svg";
 import edit from "../assets/edit.svg";
+import close from "../assets/close.svg";
+
+function useForceUpdate() {
+    let [value, setState] = useState(true);
+    return () => setState(!value);
+}
 
 export default function Run(props) {
 
@@ -32,7 +39,7 @@ export default function Run(props) {
 
     function refreshPage() {
         window.location.reload(false);
-      }
+    }
 
     function handleDelete() {
         axios
@@ -49,6 +56,10 @@ export default function Run(props) {
         });
 
         refreshPage();
+    }
+
+    function handleExit() {
+        unmountComponentAtNode(document.getElementById('edit'));
     }
 
     return (
@@ -96,7 +107,7 @@ export default function Run(props) {
                 </div>
             </div>
             <div class="mt-4">
-                {editMode && <Edit data={props.data} />}
+                {editMode && <Edit id="id" data={props.data} />}
             </div>
         </div>
     );
