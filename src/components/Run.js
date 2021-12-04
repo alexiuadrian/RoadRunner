@@ -15,6 +15,12 @@ export default function Run(props) {
         }
     }
     
+    function formatDate() {
+        var d = props.data.date.slice(0, 10);
+
+        return d;
+    }
+
     return (
         <div>
             <div class="card shadow-lg">
@@ -28,6 +34,7 @@ export default function Run(props) {
                     <p class="card-text">
                     Congratulations! You had an average speed of {props.data.average_speed.toFixed(2)} km/h.
                     </p>
+                    <h6>{formatDate()}</h6>
                 </div>
             </div>
         </div>

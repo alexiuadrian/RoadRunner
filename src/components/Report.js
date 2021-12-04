@@ -1,21 +1,19 @@
-import React, {useContext, useState, useEffect} from "react";
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import Run from './Run';
 import Navbar from './Navbar';
-import SecondNavbar from "./SecondNavbar";
+import SecondNavbar from './SecondNavbar';
+import ReportCard from './ReportCard';
 
-export default function AllRuns(props) {
-    const [runs, setRuns] = useState(null);
-    const [filter, setFilter] = useState(false);
-    const [fromDate, setFromDate] = useState(null);
-    const [toDate, setToDate] = useState(null);
+export default function Report(props) {
+
+    const [report, setReport] = useState('');
 
     useEffect(() => {
         const config = {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         };
         axios
-        .get("http://localhost:3000/api/runs",
+        .get("http://localhost:3000/api/report",
         {
             headers: {
                 Authorization: `token ${localStorage.getItem('token')}`
@@ -23,7 +21,7 @@ export default function AllRuns(props) {
         })
         .then((res) => {
             console.log(res.data);
-            setRuns(res.data);
+            setReport(res.data);
         })
         .catch((err) => {
             console.log(err);
@@ -34,12 +32,12 @@ export default function AllRuns(props) {
         <div>
             <Navbar/>
             <SecondNavbar/>
-            {runs &&
-              runs.map((run, index) => (
+
+            <div class="filter mt-4">
                 <div class='mt-3'>
-                    <Run data={run}/>
+                    <ReportCard data={report}/>
                 </div>
-              ))}
+            </div>
         </div>
     );
 }

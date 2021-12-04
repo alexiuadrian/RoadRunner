@@ -63,3 +63,26 @@ body {
     height: 35px;
   }
 }
+
+.notFoundImage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.notFoundText {
+  text-align: center;
+  color: #2C6975;
+}
+
+.runButtonNotFound {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.filter {
+  text-align: center;
+}

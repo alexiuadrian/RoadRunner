@@ -7,10 +7,11 @@ import Login from './components/Login';
 import Register from './components/Register'
 import AllRuns from './components/AllRuns';
 import AddRun from './components/AddRun';
-import Run from './components/Run';
 import NotFound from './components/NotFound';
 import RequireAuth from './components/RequireAuth';
 import RequireNotAuth from './components/RequireNotAuth';
+import FilteredRuns from './components/FilteredRuns';
+import Report from './components/Report';
 
 function App() {
 
@@ -24,9 +25,11 @@ function App() {
 
         {/* Routes for authenticated users */}
         <Route path="/" element={<RequireAuth><AllRuns/></RequireAuth>}/>
+        <Route path="filter" element={<RequireAuth><FilteredRuns/></RequireAuth>}/>
         <Route path="add" element={<RequireAuth><AddRun/></RequireAuth>}/>
+        <Route path="report" element={<RequireAuth><Report/></RequireAuth>}/>
 
-        <Route path="404" element={<NotFound/>}/>
+        <Route path="*" exact={true} element={<NotFound/>}/>
       </Routes>
     </Router>
   );
