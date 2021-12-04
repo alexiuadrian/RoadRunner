@@ -62,6 +62,16 @@ body {
     width: 35px;
     height: 35px;
   }
+
+  .editButton {
+    width: 25px;
+    height: 25px;
+  }
+
+  .deleteButton {
+    width: 25px;
+    height: 25px;
+  }
 }
 
 .notFoundImage {

@@ -14,9 +14,6 @@ export default function FilteredRuns(props) {
     const [toDate, setToDate] = useState(new Date());
 
     function handleFiltering() {
-        const config = {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-        };
         axios
         .get("http://localhost:3000/api/runs?from_date='" + fromDate +  "'&to_date='" + toDate + "'",
         {
@@ -50,7 +47,7 @@ export default function FilteredRuns(props) {
 
                 <div class="mb-3">
                     <label class="form-label">To Date</label>
-                    <DatePicker selected={toDate} onChange={(date) => setToDate(date)} />
+                    <DatePicker dateFormat="yyyy-MM-dd" selected={toDate} onChange={(date) => setToDate(date)} />
                 </div>
 
                 <button type="button" class="btn btn-outline-primary"

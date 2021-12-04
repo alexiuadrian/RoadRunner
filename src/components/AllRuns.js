@@ -10,10 +10,28 @@ export default function AllRuns(props) {
     const [fromDate, setFromDate] = useState(null);
     const [toDate, setToDate] = useState(null);
 
+    // useEffect(()=> {
+    //     fetchRuns();
+    // }, [runs]);
+
+    // function fetchRuns() {
+    //     axios
+    //     .get("http://localhost:3000/api/runs",
+    //     {
+    //         headers: {
+    //             Authorization: `token ${localStorage.getItem('token')}`
+    //         }
+    //     })
+    //     .then((res) => {
+    //         console.log(res.data);
+    //         setRuns(res.data);
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
+    // }
+
     useEffect(() => {
-        const config = {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-        };
         axios
         .get("http://localhost:3000/api/runs",
         {
@@ -28,7 +46,7 @@ export default function AllRuns(props) {
         .catch((err) => {
             console.log(err);
         });
-    }, []);
+    }, [runs]);
 
     return (
         <div>

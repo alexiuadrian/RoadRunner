@@ -65,11 +65,11 @@ export default function AddRun(props) {
                         <label class="form-label">Time</label>
                     </div>
                 <div class="d-flex flex-row gap-5 mb-3">
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                     hour(s)
                         <input type="text" class="form-control col-12" required onChange={(e) => setHours(e.target.value)}/>
                     </div>
-                    <div class="col-md-1 t-2 e-2">
+                    <div class="col-md-2">
                         minute(s)
                         <input type="text" class="form-control col-12" required onChange={(e) => setMinutes(e.target.value)}/>
                     </div>
