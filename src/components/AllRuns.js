@@ -6,30 +6,6 @@ import SecondNavbar from "./SecondNavbar";
 
 export default function AllRuns(props) {
     const [runs, setRuns] = useState(null);
-    const [filter, setFilter] = useState(false);
-    const [fromDate, setFromDate] = useState(null);
-    const [toDate, setToDate] = useState(null);
-
-    // useEffect(()=> {
-    //     fetchRuns();
-    // }, [runs]);
-
-    // function fetchRuns() {
-    //     axios
-    //     .get("http://localhost:3000/api/runs",
-    //     {
-    //         headers: {
-    //             Authorization: `token ${localStorage.getItem('token')}`
-    //         }
-    //     })
-    //     .then((res) => {
-    //         console.log(res.data);
-    //         setRuns(res.data);
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
-    // }
 
     useEffect(() => {
         axios
@@ -46,8 +22,25 @@ export default function AllRuns(props) {
         .catch((err) => {
             console.log(err);
         });
-    }, [runs]);
+    }, []);
 
+    function fetchRuns() {
+        axios
+        .get("http://localhost:3000/api/runs",
+        {
+            headers: {
+                Authorization: `token ${localStorage.getItem('token')}`
+            }
+        })
+        .then((res) => {
+            console.log(res.data);
+            setRuns(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
+ 
     return (
         <div>
             <Navbar/>

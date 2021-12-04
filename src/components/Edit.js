@@ -7,9 +7,9 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function AddRun(props) {
+export default function Edit(props) {
     const [date, setDate] = useState(new Date());
-    const [distance, setDistance] = useState('');
+    const [distance, setDistance] = useState(props.data.distance);
     const [hours, setHours] = useState('');
     const [minutes, setMinutes] = useState('');
     const [userId, setUserId] = useState(jwt_decode(localStorage.getItem('token')).user_id);
@@ -20,31 +20,36 @@ export default function AddRun(props) {
         var response = null;
 
         try {
-            response = await axios.post(
-                "http://localhost:3000/api/runs",
-                {
-                    "date": date,
-                    "distance": parseInt(distance),
-                    "time": (hours + ' ' + minutes),
-                    "user_id": userId
-                },
-                {
-                    headers: {
-                        Authorization: `token ${localStorage.getItem('token')}`
-                    }
+        response = await axios.put(
+            "http://localhost:3000/api/runs/" + props.data.id,
+            {
+                "date": date,
+                "distance": parseInt(distance),
+                "time": (hours + ' ' + minutes),
+                "user_id": userId
+            },
+            {
+                headers: {
+                    Authorization: `token ${localStorage.getItem('token')}`
                 }
-            )} catch (error) {
-                console.error(error);
             }
+        )
 
         console.log(response.data);
+
+        } catch (error) {
+        console.error(error);
+        }
+
+        refreshPage();
+      }
+
+      function refreshPage() {
+        window.location.reload(false);
       }
 
     return (
         <div>
-            <Navbar/>
-            <SecondNavbar/>
-            
             <form onSubmit={ (event) => {
                 addRun(event);
             } }>
@@ -55,7 +60,7 @@ export default function AddRun(props) {
                 </div>
                 <div class="mb-3 col-md-3">
                     <label class="form-label">Distance (km)</label>
-                    <input type="text" class="form-control" required onChange={(e) => setDistance(e.target.value)}/>
+                    <input type="text" class="form-control" required placeholder={props.data.distance} onChange={(e) => setDistance(e.target.value)}/>
                 </div>
 
                 <div class="col-md-1">
@@ -73,7 +78,7 @@ export default function AddRun(props) {
 
                 </div>
 
-                <button type="submit" class="btn btn-primary mt-4">Submit</button>
+                <button type="submit" onClick={addRun} class="btn btn-primary mt-4">Submit</button>
             </form>
         </div>
     );

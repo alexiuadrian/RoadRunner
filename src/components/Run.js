@@ -1,11 +1,13 @@
 import React, {useContext, useState, useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
+import Edit from "./Edit";
 import axios from "axios";
 import trash from "../assets/trash.svg";
 import edit from "../assets/edit.svg";
 
 export default function Run(props) {
 
+    const [editMode, setEditMode] = useState(false);
     const navigate = useNavigate();
 
     function formatTime() {
@@ -28,6 +30,10 @@ export default function Run(props) {
         return d;
     }
 
+    function refreshPage() {
+        window.location.reload(false);
+      }
+
     function handleDelete() {
         axios
         .delete("http://localhost:3000/api/runs/" + props.data.id,
@@ -41,7 +47,8 @@ export default function Run(props) {
         .catch((err) => {
             console.log(err);
         });
-        navigate('/');
+
+        refreshPage();
     }
 
     return (
@@ -61,11 +68,16 @@ export default function Run(props) {
                 </div>
                 <div class="d-flex justify-content-evenly mb-3">
                     <div>
-                        <a href="edit">
+                        <a>
                             <img
                                 class="editButton"
                                 src={edit}
                                 alt="trash button"
+                                width="30px"
+                                height="30px"
+                                onClick={() => {
+                                    setEditMode(true);
+                                }}
                             />
                         </a>
                     </div>
@@ -75,11 +87,16 @@ export default function Run(props) {
                                 class="deleteButton"
                                 src={trash}
                                 alt="trash button"
+                                width="30px"
+                                height="30px"
                                 onClick={handleDelete}
                             />
                         </a>
                     </div>
                 </div>
+            </div>
+            <div class="mt-4">
+                {editMode && <Edit data={props.data} />}
             </div>
         </div>
     );
