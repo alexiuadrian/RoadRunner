@@ -1,15 +1,15 @@
 import React, {useContext, useState, useEffect} from "react";
 import axios from "axios";
-import Run from './Run';
+import User from './User';
 import Navbar from './Navbar';
 import SecondNavbar from "./SecondNavbar";
 
-export default function AllRuns(props) {
-    const [runs, setRuns] = useState(null);
+export default function AllUsers(props) {
+    const [users, setUsers] = useState(null);
 
     useEffect(() => {
         axios
-        .get("http://localhost:3000/api/runs",
+        .get("http://localhost:3000/users",
         {
             headers: {
                 Authorization: `token ${localStorage.getItem('token')}`
@@ -17,7 +17,7 @@ export default function AllRuns(props) {
         })
         .then((res) => {
             console.log(res.data);
-            setRuns(res.data);
+            setUsers(res.data);
         })
         .catch((err) => {
             console.log(err);
@@ -28,10 +28,10 @@ export default function AllRuns(props) {
         <div>
             <Navbar/>
             <SecondNavbar/>
-            {runs &&
-              runs.map((run, index) => (
+            {users &&
+              users.map((user, index) => (
                 <div class='mt-3'>
-                    <Run data={run}/>
+                    <User data={user}/>
                 </div>
               ))}
         </div>

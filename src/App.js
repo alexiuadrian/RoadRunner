@@ -12,6 +12,8 @@ import RequireAuth from './components/RequireAuth';
 import RequireNotAuth from './components/RequireNotAuth';
 import FilteredRuns from './components/FilteredRuns';
 import Report from './components/Report';
+import AllUsers from './components/AllUsers';
+import AddUser from './components/AddUser';
 
 function App() {
 
@@ -28,6 +30,8 @@ function App() {
         <Route path="filter" element={<RequireAuth><FilteredRuns/></RequireAuth>}/>
         <Route path="add" element={<RequireAuth><AddRun/></RequireAuth>}/>
         <Route path="report" element={<RequireAuth><Report/></RequireAuth>}/>
+        <Route path="users" element={<RequireAuth><AllUsers/></RequireAuth>}/>
+        <Route path="adduser" element={<RequireAuth><AddUser/></RequireAuth>}/>
 
         <Route path="*" exact={true} element={<NotFound/>}/>
       </Routes>

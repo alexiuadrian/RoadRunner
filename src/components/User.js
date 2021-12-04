@@ -1,33 +1,18 @@
 import React, {useContext, useState, useEffect} from "react";
 import { unmountComponentAtNode, render } from "react-dom";
 import { useNavigate } from 'react-router-dom';
-import Edit from "./Edit";
+import EditUser from "./EditUser";
 import axios from "axios";
 import trash from "../assets/trash.svg";
 import edit from "../assets/edit.svg";
 import close from "../assets/close.svg";
 
-export default function Run(props) {
+export default function User(props) {
 
     const [editMode, setEditMode] = useState(false);
-    const navigate = useNavigate();
-
-    function formatTime() {
-        const hoursAndMinutes = props.data.time.split(" ");
-
-        if (hoursAndMinutes[0] == 0) {
-            return (hoursAndMinutes[1] + ' minutes');
-        }
-        else if (hoursAndMinutes[0] == 1) {
-            return (hoursAndMinutes[0] + ' hour and ' + hoursAndMinutes[1] + ' minutes');
-        }
-        else {
-            return (hoursAndMinutes[0] + ' hours and ' + hoursAndMinutes[1] + ' minutes');
-        }
-    }
     
     function formatDate() {
-        var d = props.data.date.slice(0, 10);
+        var d = props.data.created_at.slice(0, 10);
 
         return d;
     }
@@ -38,7 +23,7 @@ export default function Run(props) {
 
     function handleDelete() {
         axios
-        .delete("http://localhost:3000/api/runs/" + props.data.id,
+        .delete("http://localhost:3000/users/" + props.data.id,
         {
             headers: {
                 Authorization: `token ${localStorage.getItem('token')}`
@@ -53,23 +38,15 @@ export default function Run(props) {
         refreshPage();
     }
 
-    function handleExit() {
-        unmountComponentAtNode(document.getElementById('edit'));
-    }
-
     return (
         <div>
             <div class="card shadow-lg">
                 <div class="card-body">
-                    <h5 class="card-title">
-                        You ran 
-                        {' ' + props.data.distance + ' km '}
-                        in  
-                        {' ' + formatTime()}
-                     </h5>
-                    <p class="card-text">
-                    Congratulations! You had an average speed of {props.data.average_speed.toFixed(2)} km/h.
-                    </p>
+                    <p class="card-title">
+                        Username: {' ' + props.data.username } <br/>
+                        Email: {' ' + props.data.email}
+                     </p>
+                    
                     <h6>{formatDate()}</h6>
                 </div>
                 <div class="d-flex justify-content-evenly mb-3">
@@ -102,7 +79,7 @@ export default function Run(props) {
                 </div>
             </div>
             <div class="mt-4">
-                {editMode && <Edit id="id" data={props.data} />}
+                {editMode && <EditUser data={props.data} />}
             </div>
         </div>
     );
