@@ -10,6 +10,10 @@ import close from "../assets/close.svg";
 export default function User(props) {
 
     const [editMode, setEditMode] = useState(false);
+    const [roles, setRoles] = useState(null);
+    const [isUserManager, setIsUserManager] = useState(null);
+    const [isUser, setIsUser] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(null);
     
     function formatDate() {
         var d = props.data.created_at.slice(0, 10);
@@ -38,6 +42,38 @@ export default function User(props) {
         refreshPage();
     }
 
+    useEffect(() => {
+        axios
+        .get("http://localhost:3000/get_user_roles/" + props.data.id,
+        {
+            headers: {
+                Authorization: `token ${localStorage.getItem('token')}`
+            }
+        })
+        .then((res) => {
+            console.log(res.data);
+            setRoles(res.data);
+
+            for (let role in roles) {
+                console.log(role);
+                if(roles[role].name === "admin") {
+                    setIsAdmin(true);
+                }
+    
+                if(roles[role].name === "user_manager") {
+                    setIsUserManager(true);
+                }
+    
+                if(roles[role].name === "user") {
+                    setIsUser(true);
+                }
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });   
+    }, []);
+
     return (
         <div>
             <div class="card shadow-lg">
@@ -60,6 +96,20 @@ export default function User(props) {
                                 height="30px"
                                 onClick={() => {
                                     setEditMode(true);
+                                    for (let role in roles) {
+                                        console.log(role);
+                                        if(roles[role].name === "admin") {
+                                            setIsAdmin(true);
+                                        }
+                            
+                                        if(roles[role].name === "user_manager") {
+                                            setIsUserManager(true);
+                                        }
+                            
+                                        if(roles[role].name === "user") {
+                                            setIsUser(true);
+                                        }
+                                    }
                                 }}
                             />
                         </a>
@@ -79,7 +129,7 @@ export default function User(props) {
                 </div>
             </div>
             <div class="mt-4">
-                {editMode && <EditUser data={props.data} />}
+                {editMode && <EditUser data={props.data} isUser={isUser} isUserManager={isUserManager} isAdmin={isAdmin} />}
             </div>
         </div>
     );

@@ -31,7 +31,7 @@ export default function AllUsers(props) {
             {users &&
               users.map((user, index) => (
                 <div class='mt-3'>
-                    <User data={user}/>
+                    <User data={user} />
                 </div>
               ))}
         </div>
