@@ -12,25 +12,33 @@ export default function SecondNavbar(props) {
 
     const renderUsersButton = () => {
         if (isAdmin || isUserManager) {
-          return <img
-            class="runButton"
-            src={users}
-            alt="users button"
-            width='30px'
-            height='30px'
-          />;
+          return <li class="nav-item m-2">
+          <a class="nav-link" href="users">
+            <img
+                class="runButton"
+                src={users}
+                alt="users button"
+                width='30px'
+                height='30px'
+            />
+                </a>
+            </li>
         }
     }
 
     const renderNewUserButton = () => {
         if (isAdmin || isUserManager) {
-          return <img
+          return <li class="nav-item m-2">
+          <a class="nav-link" href="adduser">
+              <img
             class="runButton"
             src={newuser}
             alt="users button"
             width='30px'
             height='30px'
-          />;
+          />
+            </a>
+        </li>
         }
     }
 
@@ -59,16 +67,11 @@ export default function SecondNavbar(props) {
                         />
                     </a>
                 </li>
-                <li class="nav-item m-2">
-                    <a class="nav-link" href="users">
-                        {renderUsersButton()}
-                    </a>
-                </li>
-                <li class="nav-item m-2">
-                    <a class="nav-link" href="adduser">
-                        {renderNewUserButton()}
-                    </a>
-                </li>
+                
+                {renderUsersButton()}
+
+                {renderNewUserButton()}
+
 
             </ul>
         </header>

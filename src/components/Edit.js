@@ -7,11 +7,20 @@ import "react-datepicker/dist/react-datepicker.css";
 import "../App.css";
 
 export default function Edit(props) {
+    const hoursAndMinutes = formatTime();
     const [date, setDate] = useState(new Date());
     const [distance, setDistance] = useState(props.data.distance);
-    const [hours, setHours] = useState('');
-    const [minutes, setMinutes] = useState('');
+    const [hours, setHours] = useState(hoursAndMinutes[0]);
+    const [minutes, setMinutes] = useState(hoursAndMinutes[1]);
     const [userId, setUserId] = useState(jwt_decode(localStorage.getItem('token')).user_id);
+
+    function formatTime() {
+        const hoursAndMinutes = props.data.time.split(" ");
+
+        console.log(hoursAndMinutes[0]);
+
+        return hoursAndMinutes;
+    }
 
     async function editRun(event) {
         event.preventDefault();
@@ -60,7 +69,7 @@ export default function Edit(props) {
                 </div>
                 <div class="mb-3 col-md-3">
                     <label class="form-label">Distance (km)</label>
-                    <input type="text" class="form-control" required placeholder={props.data.distance} onChange={(e) => setDistance(e.target.value)}/>
+                    <input type="text" class="form-control" required defaultValue={props.data.distance} onChange={(e) => setDistance(e.target.value)}/>
                 </div>
 
                 <div class="col-md-1">
@@ -69,11 +78,11 @@ export default function Edit(props) {
                 <div class="d-flex flex-row gap-5 mb-3">
                     <div class="col-md-2">
                     hour(s)
-                        <input type="text" class="form-control col-12" required onChange={(e) => setHours(e.target.value)}/>
+                        <input type="text" class="form-control col-12" required defaultValue={hours} onChange={(e) => setHours(e.target.value)}/>
                     </div>
                     <div class="col-md-2">
                         minute(s)
-                        <input type="text" class="form-control col-12" required onChange={(e) => setMinutes(e.target.value)}/>
+                        <input type="text" class="form-control col-12" required defaultValue={minutes} onChange={(e) => setMinutes(e.target.value)}/>
                     </div>
 
                 </div>

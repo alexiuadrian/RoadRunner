@@ -33,11 +33,16 @@ export default function Register(props) {
         }
         else {
             setRegisterError(false);
+            refreshPage();
         }
 
         } catch (error) {
         console.error(error);
         }
+      }
+
+      function refreshPage() {
+        window.location.reload(false);
       }
 
     return (

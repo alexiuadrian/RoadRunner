@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import NavbarLogin from "./NavbarLogin";
+import AlertForLogin from "./AlertForLogin";
 
 export default function Login(props) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [registerError, setRegisterError] = useState(false);
     const navigate = useNavigate();
 
     async function sendLogin(event) {
@@ -25,10 +27,19 @@ export default function Login(props) {
         )
 
         localStorage.setItem('token', response.data.token);
-        navigate('/');
+
+        if (response.data.error) {
+            setRegisterError(true);
+            console.log(response.data.error);
+        }
+        else {
+            setRegisterError(false);
+            navigate('/');   
+        }
 
         } catch (error) {
         console.error(error);
+        setRegisterError(true);
         }
 
       }
@@ -41,6 +52,7 @@ export default function Login(props) {
             <form onSubmit={ (event) => {
                 sendLogin(event);
             } }>
+                <AlertForLogin registerError={registerError}/>
                 <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Username</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required
