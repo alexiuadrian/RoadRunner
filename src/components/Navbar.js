@@ -15,6 +15,9 @@ export default function Navbar(props) {
 
     return (
         <header>
+            <p class="text-center text-light">
+                Hello, {localStorage.getItem('username')}
+            </p>
             <ul class="nav justify-content-center">
                 <li class="nav-item m-2">
                     <a class="nav-link" aria-current="page" href="/">
