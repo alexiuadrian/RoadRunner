@@ -103,12 +103,12 @@ export default function EditUser(props) {
                 
                 <div class="mb-3 col-md-5">
                     <label class="form-label">Username</label>
-                    <input type="text" class="form-control" required placeholder={props.data.username} onChange={(e) => setUsername(e.target.value)}/>
+                    <input type="text" class="form-control" required onChange={(e) => setUsername(e.target.value)} defaultValue={props.data.username} />
                 </div>
 
                 <div class="mb-3 col-md-5">
                     <label class="form-label">Email</label>
-                    <input type="text" class="form-control" required placeholder={props.data.email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="text" class="form-control" required onChange={(e) => setEmail(e.target.value)} defaultValue={props.data.email} />
                 </div>
 
                 <div class="form-check">
