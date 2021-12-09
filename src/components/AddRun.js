@@ -25,7 +25,7 @@ export default function AddRun(props) {
 
         try {
             response = await axios.post(
-                "https://roadrunner-api.herokuapp.com/api/runs",
+                "https://roadrunnerapi.herokuapp.com/api/runs",
                 {
                     "date": date,
                     "distance": parseInt(distance),

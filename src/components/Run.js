@@ -38,7 +38,7 @@ export default function Run(props) {
 
     function handleDelete() {
         axios
-        .delete("https://roadrunner-api.herokuapp.com/api/runs/" + props.data.id,
+        .delete("https://roadrunnerapi.herokuapp.com/api/runs/" + props.data.id,
         {
             headers: {
                 Authorization: `token ${localStorage.getItem('token')}`

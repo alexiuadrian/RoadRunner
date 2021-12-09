@@ -15,7 +15,7 @@ export default function FilteredRuns(props) {
 
     function handleFiltering() {
         axios
-        .get("https://roadrunner-api.herokuapp.com/api/runs?from_date='" + fromDate +  "'&to_date='" + toDate + "'",
+        .get("https://roadrunnerapi.herokuapp.com/api/runs?from_date='" + fromDate +  "'&to_date='" + toDate + "'",
         {
             headers: {
                 Authorization: `token ${localStorage.getItem('token')}`

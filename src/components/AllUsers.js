@@ -9,7 +9,7 @@ export default function AllUsers(props) {
 
     useEffect(() => {
         axios
-        .get("https://roadrunner-api.herokuapp.com/users",
+        .get("https://roadrunnerapi.herokuapp.com/users",
         {
             headers: {
                 Authorization: `token ${localStorage.getItem('token')}`
