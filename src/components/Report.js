@@ -13,7 +13,7 @@ export default function Report(props) {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         };
         axios
-        .get("http://localhost:3000/api/report",
+        .get("https://roadrunner-api.herokuapp.com/api/report",
         {
             headers: {
                 Authorization: `token ${localStorage.getItem('token')}`

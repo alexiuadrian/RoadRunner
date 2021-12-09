@@ -42,7 +42,7 @@ export default function EditUser(props) {
 
         try {
             response1 = await axios.post(
-                "http://localhost:3000/user_roles/" + props.data.id,
+                "https://roadrunner-api.herokuapp.com/user_roles/" + props.data.id,
                 {
                     "is_admin": isAdmin,
                     "is_user_manager": isUserManager,

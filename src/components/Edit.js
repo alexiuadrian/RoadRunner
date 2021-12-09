@@ -29,7 +29,7 @@ export default function Edit(props) {
 
         try {
         response = await axios.put(
-            "http://localhost:3000/api/runs/" + props.data.id,
+            "https://roadrunner-api.herokuapp.com/api/runs/" + props.data.id,
             {
                 "date": date,
                 "distance": parseInt(distance),

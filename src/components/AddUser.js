@@ -18,7 +18,7 @@ export default function AddUser(props) {
 
         try {
         response = await axios.post(
-            "http://localhost:3000/register/",
+            "https://roadrunner-api.herokuapp.com/register/",
             {
                 "username": username,
                 "email": email,

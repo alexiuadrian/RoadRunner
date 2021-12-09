@@ -16,7 +16,7 @@ export default function Register(props) {
         try {
         console.log(username, email, password, confirmPassword);
         const response = await axios.post(
-            "http://localhost:3000/register",
+            "https://roadrunner-api.herokuapp.com/register",
             {
                 "username": username,
                 "email": email,

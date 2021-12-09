@@ -27,7 +27,7 @@ export default function User(props) {
 
     function handleDelete() {
         axios
-        .delete("http://localhost:3000/users/" + props.data.id,
+        .delete("https://roadrunner-api.herokuapp.com/users/" + props.data.id,
         {
             headers: {
                 Authorization: `token ${localStorage.getItem('token')}`
@@ -44,7 +44,7 @@ export default function User(props) {
 
     useEffect(() => {
         axios
-        .get("http://localhost:3000/get_user_roles/" + props.data.id,
+        .get("https://roadrunner-api.herokuapp.com/get_user_roles/" + props.data.id,
         {
             headers: {
                 Authorization: `token ${localStorage.getItem('token')}`
