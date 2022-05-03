@@ -38,19 +38,23 @@ export default function Run(props) {
 
     function handleDelete() {
         axios
-        .delete("http://localhost:3000/api/runs/" + props.data.id,
-        {
+        .delete("http://localhost:3000/api/runs/",
+        {   
             headers: {
                 Authorization: `token ${localStorage.getItem('token')}`
+            },
+            data: {
+                id: props.data.id,
             }
         })
         .then((res) => {
+            console.log(res);
         })
         .catch((err) => {
-            console.log(err);
+            console.log(err, props.data.id);
         });
 
-        refreshPage();
+        // refreshPage();
     }
 
     function handleExit() {
